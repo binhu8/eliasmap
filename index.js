@@ -9,6 +9,10 @@ app.use(cors());
 app.use(express.json())
 app.use('/redes', require('./src/routes/rede.routes'))
 
+app.get('/', (req, res)=> {
+    res.send('Bem-vindo')
+})
+
 app.listen(port, ()=> {
     console.log('servidor online')
 })
