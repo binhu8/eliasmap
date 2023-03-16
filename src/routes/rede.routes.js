@@ -1,6 +1,15 @@
 const router = require('express').Router();
 const Rede = require('../models/rede');
 
+router.get('/', async(req, res)=> {
+    try{
+        const redes = await Rede.find({})
+        res.json(redes)
+    }catch(error){
+        res.json({error: true, message: error.message})
+    }
+});
+
 router.get('/:rede', async(req, res)=> {
     try{
         const rede = req.params.rede
