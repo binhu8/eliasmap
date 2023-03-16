@@ -22,8 +22,14 @@ router.get('/:rede', async(req, res)=> {
 
 router.post('/', async(req, res)=> {
     try{
-        const rede = await Rede(req.body).save()
-        res.json(rede)
+        const containRede = await Rede.find({rede: req.body.rede})
+        if(containRede){
+            console.log('update')
+        }else{
+            const rede = await Rede(req.body).save()
+            res.json(rede)
+        }
+        
     }catch(error){
         res.json({error: true, message: error.message})
     }
