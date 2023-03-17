@@ -3,14 +3,17 @@ const Schema = mongoose.Schema;
 
 
 const rede = new Schema({
-    rede: String,
+    nome: String,
+    contato: String,
     endereco: {
         cep: String,
         logradouro: String,
         numero: String,
         bairro: String,
         localidade: String,
-        uf: String
+        uf: String,
+        lat: Number,
+        lng: Number 
     },
     lojas: [
         {
@@ -22,7 +25,9 @@ const rede = new Schema({
                         numero: String,
                         bairro: String,
                         localidade: String,
-                        uf: String
+                        uf: String,
+                        lat: Number,
+                        lng: Number 
                 }
         }
     ]
