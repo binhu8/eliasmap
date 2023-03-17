@@ -12,9 +12,9 @@ router.get('/', async(req, res)=> {
 
 router.get('/:rede', async(req, res)=> {
     try{
-        const rede = req.params.rede
-        const [redes] = await Rede.find({rede})
-        res.json(redes)
+        const nome = req.params.rede
+        const [rede] = await Rede.find({nome})
+        res.json(rede)
     }catch(error){
         res.json({error: true, message: error.message})
     }
