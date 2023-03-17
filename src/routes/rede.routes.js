@@ -21,15 +21,26 @@ router.get('/:rede', async(req, res)=> {
 });
 
 router.post('/', async(req, res)=> {
-    try{
-        const containRede = await Rede.find({rede: req.body.rede})
-        if(containRede){
-            console.log('update')
+    try{ 
+        const rede = req.body
+        const containRede = await Rede.find({rede: rede.rede})
+        if(containRede.length > 0){
+            const update = await Rede.findOneAndUpdate({rede: rede.rede}, rede)
+            res.json(update)
         }else{
-            const rede = await Rede(req.body).save()
-            res.json(rede)
-        }
-        
+            const newRede = await Rede(rede).save()
+            res.json(newRede)
+        } 
+    }catch(error){
+        res.json({error: true, message: error.message})
+    }
+})
+
+router.delete('/:id', async(req, res)=> {
+    try{
+        const id = req.params.id
+        const deletedRede = await Rede.findByIdAndDelete(id)
+        res.json({deletedRede})
     }catch(error){
         res.json({error: true, message: error.message})
     }
