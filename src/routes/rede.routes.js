@@ -23,9 +23,9 @@ router.get('/:rede', async(req, res)=> {
 router.post('/', async(req, res)=> {
     try{ 
         const rede = req.body
-        const containRede = await Rede.find({rede: rede.rede})
+        const containRede = await Rede.find({nome: rede.nome})
         if(containRede.length > 0){
-            const update = await Rede.findOneAndUpdate({rede: rede.rede}, rede)
+            const update = await Rede.findOneAndUpdate({nome: rede.nome}, rede)
             res.json(update)
         }else{
             const newRede = await Rede(rede).save()
